@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Decentralized Voting Application</title>
+    <script src="https://cdn.ethers.io/lib/ethers-5.7.1.umd.min.js" type="application/javascript"></script>
+    <script src="main.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #e0f2f1;
+            display: flex;
+        }
+
+        .navbar {
+            width: 200px;
+            background-color: #004d40;
+            color: white;
+            height: 100vh;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar a {
+            color: white;
+            text-align: left;
+            padding: 14px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            display: block;
+        }
+
+        .navbar a:hover {
+            background-color: #00796b;
+            color: white;
+        }
+
+        .content {
+            margin-left: 220px;
+            padding: 20px;
+            width: calc(100% - 220px);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-top: 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .centered {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .centered p {
+            font-size: 18px;
+            color: #333;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        button {
+            background-color: #00796b;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            display: block;
+            margin: 10px;
+        }
+
+        button:hover {
+            background-color: #004d40;
+        }
+
+		.cand {
+            font-size: 18px;
+            color: #333;
+            text-align: center;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #e0f2f1;
+            border-radius: 4px;
+        }
+
+        input[type=number] {
+            padding: 12px 20px;
+            margin: 0 10px 0 0;
+            box-sizing: border-box;
+            border: 2px solid #00796b;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                box-shadow: none;
+            }
+
+            .navbar a {
+                float: left;
+                display: block;
+                text-align: left;
+                padding: 10px;
+                margin-bottom: 0;
+            }
+
+            .content {
+                margin-left: 0;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/index.html">Vote</a>
+        <a href="/ListVoters.html">List Voters</a>
+        <a href="#" onclick="voteStatus()">Check Voting Status</a>
+    </div>
+
+    <div class="content">
+        <div class="header">
+            <h1>Welcome to the Decentralized Voting Application</h1>
+        </div>
+
+        <div class="centered">
+            <button onclick="connectMetamask()">Connect Metamask</button>
+            <p id="metamasknotification">Please connect your Metamask wallet to proceed.</p>
+        </div>
+
+        <div class="centered form-inline">
+            <input type="number" id="vote" placeholder="Enter Index of the Voter">
+            <button onclick="addVote()">Add Vote</button>
+        </div>
+		
+		<div id="status" class="centered"></div>
+        <div id="time" class="centered"></div>
+        <div class="cand" id="cand"></div>
+    </div>
+</body>
+</html>

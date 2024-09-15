@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Decentralized Voting Application</title>
+    <script src="https://cdn.ethers.io/lib/ethers-5.7.1.umd.min.js" type="application/javascript"></script>
+    <script src="main.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f4f4;
+            display: flex;
+        }
+
+        .navbar {
+            width: 200px;
+            background-color: #004d40;
+            color: white;
+            height: 100vh;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar a {
+            color: white;
+            text-align: left;
+            padding: 14px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            display: block;
+        }
+
+        .navbar a:hover {
+            background-color: #00796b;
+            color: white;
+        }
+
+        .content {
+            margin-left: 220px;
+            padding: 20px;
+            width: calc(100% - 220px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-top: 10px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .centered {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .centered p {
+            font-size: 18px;
+            color: #333;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        button {
+            background-color: #00796b;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            display: block;
+            margin: 10px;
+        }
+
+        button:hover {
+            background-color: #004d40;
+        }
+
+        input[type=text] {
+            padding: 12px 20px;
+            margin: 0 10px;
+            box-sizing: border-box;
+            border: 2px solid #00796b;
+            border-radius: 4px;
+            font-size: 16px;
+            width: 300px;
+        }
+
+        input[type=submit] {
+            background-color: #00796b;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+            background-color: #004d40;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 600px;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #e0f2f1;
+            font-weight: bold;
+        }
+
+        .p3 {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                box-shadow: none;
+            }
+
+            .navbar a {
+                float: left;
+                display: block;
+                text-align: left;
+                padding: 10px;
+                margin-bottom: 0;
+            }
+
+            .content {
+                margin-left: 0;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/index.html">Vote</a>
+        <a href="/ListVoters.html">List Voters</a>
+        <a href="#" onclick="getAllCandidates()">List All Candidates</a>
+    </div>
+
+    <div class="content">
+        <div class="header">
+            <h1>Manage Candidates</h1>
+        </div>
+
+        <div class="centered">
+            <button onclick="connectMetamask()">Connect Metamask</button>
+            <p id="metamasknotification">Please connect your Metamask wallet to proceed.</p>
+        </div>
+
+        <div class="centered">
+            <form method="POST" action="/vote" enctype="multipart/form-data">
+                <span>Add candidate here</span>
+                <input type="text" name="vote" placeholder="Add name of candidate ... ">
+                <input type="submit" value="Add Candidate">
+            </form>
+        </div>
+
+        <div id="p3" class="p3"></div>
+
+        <table id="myTable">
+            <thead>
+                <tr>
+                    <th>Index</th>
+                    <th>Candidate Name</th>
+                    <th>Votes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Candidate rows will be inserted here -->
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
