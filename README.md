@@ -71,3 +71,6 @@ The voting system's logic is written in Solidity and deployed on the Ethereum bl
 - **Election Creation:** Allows the administrator to set up a new election and define the candidates.
 - **Voting:** Each eligible user can vote once for their chosen candidate.
 - **Result Calculation:** After the election ends, the results are calculated and stored on the blockchain for transparency.
+
+## Dashboard
+![Homepage](homepage.jpg)
